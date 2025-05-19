@@ -65,7 +65,10 @@ router.patch('/tasks/:id', async (req, res) => {
     const data = req.body;
 
     Object.keys(data).forEach(key => {
-      if (!data[key]) delete data[key];
+      // Si el valor es falsy (null o undefined), eliminar la propiedad
+      if (data[key] === undefined || data[key] === null) {
+        delete data[key];
+      }
     });
 
     const task = await Task.updateOne(
