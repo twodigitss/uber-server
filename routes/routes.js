@@ -21,7 +21,8 @@ router.get('/tasks', async(_req, res) => {
     }));
 
   } catch (error) {
-    return res.status(500).send([get_task] Something wrong at:  ${error});
+    const lol = '[get_task] Something wrong at: ' + error
+    return res.status(500).send(lol);
   }
 });
 
@@ -36,7 +37,8 @@ router.post('/tasks', async (req, res) => {
     }));
 
   } catch (error) {
-    return res.status(500).send([post_task] Something wrong at:  ${error});
+    const lol = '[post_task] Something wrong at: ' + error
+    return res.status(500).send(lol);
   }
 
 });
@@ -54,7 +56,8 @@ router.delete('/tasks/:id', async (req, res)=>{
     }));
 
   } catch (error) {
-    return res.status(500).send([usr_del] Something wrong at:  ${error});
+    const lol = '[usr_del] Something wrong at: ' + error
+    return res.status(500).send(lol);
   }
 })
 
@@ -63,6 +66,7 @@ router.patch('/tasks/:id', async (req, res) => {
   try {
     const objectId = new ObjectId(req.params.id);
     const data = req.body;
+    console.log("RECIBIENDO DEL PATCH: ", data)
 
     const task = await Task.updateOne(
       {_id: objectId}, {$set: data}
@@ -74,7 +78,8 @@ router.patch('/tasks/:id', async (req, res) => {
     }));
     
   } catch (error) {
-    return res.status(500).send([usr_mod] Something wrong at:  ${error});
+    const lol = '[usr_mod] Something wrong at:  ' + error
+    return res.status(500).send(lol);
   }
 
 });
