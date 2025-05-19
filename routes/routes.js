@@ -64,10 +64,6 @@ router.patch('/tasks/:id', async (req, res) => {
     const objectId = new ObjectId(req.params.id);
     const data = req.body;
 
-    Object.keys(data).forEach(key => {
-      if (!data[key]) delete data[key];
-    });
-
     const task = await Task.updateOne(
       {_id: objectId}, {$set: data}
     )
